@@ -44,9 +44,9 @@ can not find zipcode
 
 ## URLs
 
-| Service    | URL                    | GCP Project               |
-| ---------- | ---------------------- | ------------------------- |
-| Jaeger     | http://localhost:16686 | http://34.69.76.102:16686 |
-| Prometheus | http://localhost:9090  | -                         |
-| Zipkin     | http://localhost:9411  | http://34.69.76.102:9411  |
-| Webserver  | http://localhost:8080  | http://34.69.76.102:8080  |
+| Service    | URL                    |
+| ---------- | ---------------------- |
+| Jaeger     | http://localhost:16686 |
+| Prometheus | http://localhost:9090  |
+| Zipkin     | http://localhost:9411  |
+| Webserver  | http://localhost:8080  |
