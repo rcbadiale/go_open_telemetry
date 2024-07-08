@@ -30,4 +30,5 @@ service:
       exporters: [logging, otlp, zipkin]
     metrics:
       receivers: [otlp]
-     
+      processors: [batch]
+      exporters: [logging]

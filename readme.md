@@ -42,6 +42,5 @@ invalid zipcode
 | Service    | URL                    |
 | ---------- | ---------------------- |
 | Jaeger     | http://localhost:16686 |
-| Prometheus | http://localhost:9090  |
 | Zipkin     | http://localhost:9411  |
 | Webserver  | http://localhost:8080  |

@@ -16,7 +16,7 @@ services:
     restart: always
     command: "--config=/etc/otel-collector-config.yml"
     ports:
-      - 4317:4317 # OpenTelemetry gRPC receiver
+      - 4317:4317
       - 55678:55678
     volumes:
       - ./otel/otel-collector-config.yml:/etc/otel-collector-config.yml
