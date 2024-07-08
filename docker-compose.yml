@@ -19,7 +19,7 @@ services:
       - 4317:4317 # OpenTelemetry gRPC receiver
       - 55678:55678
     volumes:
-      - ./.docker/otel-collector-config.yml:/etc/otel-collector-config.yml
+      - ./otel/otel-collector-config.yml:/etc/otel-collector-config.yml
     depends_on:
       - jaeger
       - zipkin
