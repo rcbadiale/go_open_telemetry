@@ -37,11 +37,6 @@ Response Body:
 invalid zipcode
 ```
 
-404:
-```
-can not find zipcode
-```
-
 ## URLs
 
 | Service    | URL                    |
