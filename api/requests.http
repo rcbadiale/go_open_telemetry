@@ -1,0 +1,29 @@
+### Weather with valid CEP
+# @name valid_cep
+
+POST http://localhost:8080/weather HTTP/1.1
+Content-Type: application/json
+
+{
+    "cep": "13405162"
+}
+
+### Weather with invalid CEP
+# @name invalid_cep
+
+POST http://localhost:8080/weather HTTP/1.1
+Content-Type: application/json
+
+{
+    "cep": "134051621"
+}
+
+### Weather with unknown CEP
+# @name unknown_cep
+
+POST http://localhost:8080/weather HTTP/1.1
+Content-Type: application/json
+
+{
+    "cep": "11111111"
+}

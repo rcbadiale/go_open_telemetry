@@ -1,0 +1,59 @@
+services:
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    restart: always
+    container_name: jaeger
+    ports:
+      - 16686:16686
+      - 6831:6831/udp
+      - 6832:6832/udp
+      - 14268
+      - 14250
+
+  otel-collector:
+    image: otel/opentelemetry-collector:latest
+    container_name: otel-collector
+    restart: always
+    command: "--config=/etc/otel-collector-config.yml"
+    ports:
+      - 4317:4317 # OpenTelemetry gRPC receiver
+      - 55678:55678
+    volumes:
+      - ./.docker/otel-collector-config.yml:/etc/otel-collector-config.yml
+    depends_on:
+      - jaeger
+      - zipkin
+
+  zipkin:
+    image: openzipkin/zipkin:latest
+    ports:
+      - 9411:9411
+
+  input-service:
+    build:
+      context: .
+      dockerfile: input.Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      OTEL_EXPORTER_OTLP_ENDPOINT: otel-collector:4317
+      SERVICE_NAME: input-service
+      WEATHER_SERVICE_URL: http://weather-service:8081
+      SERVICE_PORT: 8080
+    depends_on:
+      - otel-collector
+      - weather-service
+
+  weather-service:
+    build:
+      context: .
+      dockerfile: weather.Dockerfile
+    ports:
+      - 8081:8081
+    environment:
+      WEATHER_API_KEY: "<your api key here>"
+      OTEL_EXPORTER_OTLP_ENDPOINT: otel-collector:4317
+      SERVICE_NAME: weather-service
+      SERVICE_PORT: 8081
+    depends_on:
+      - otel-collector
