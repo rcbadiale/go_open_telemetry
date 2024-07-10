@@ -37,7 +37,7 @@ type ViaCEPResponse struct {
 	Gia         string `json:"gia"`
 	Ddd         string `json:"ddd"`
 	Siafi       string `json:"siafi"`
-	Erro        bool   `json:"erro,omitempty"`
+	Erro        string `json:"erro,omitempty"`
 }
 
 // NewViaCEPService creates a new ViaCEPService
@@ -83,7 +83,7 @@ func (v *ViaCEPService) GetAddressByCEP(ctx context.Context, cep string) (*ViaCE
 	if err != nil {
 		logging.Logger.Error("Error unmarshalling response body: ", err)
 		return nil, err
-	} else if viaCepResponse.Erro {
+	} else if viaCepResponse.Erro == "true" {
 		logging.Logger.Error(fmt.Sprintf("Error invalid address by CEP: %v", viaCepResponse))
 		return nil, ErrCEPNotFound
 	}
